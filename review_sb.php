@@ -7,7 +7,7 @@ $id=$_GET['id'];
 
 if(isset($_SESSION['name']))
 {$uid=$_SESSION['id'];
-	$q="insert into review values('',$id,'$re',$uid,CURRENT_TIMESTAMP);";
+	$q="insert into review (IdInst, review, uid, time) values($id,'$re',$uid,CURRENT_TIMESTAMP);";
 $d=mysql_query($q);
 ?>
 <script>

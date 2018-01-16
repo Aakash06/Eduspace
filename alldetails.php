@@ -52,6 +52,7 @@ function log_me_out() {
 	
 	$(document).ready(function(){
 		
+		
 	
 		$('.s1').mouseover(function(){
 			$('.s11').show();
@@ -308,26 +309,30 @@ height:600px;"></div>
 
 function af()
 {
-<?php if(isset($_SESSION["name"]))
-{
-$i=$_SESSION['id'];
-$qv="select * from wishlist where uid=$i and insId=$ins_id;";
-$d= mysql_query($qv);
-      if(mysql_num_rows($d)>0)
-         {?>
-           alert('already added to your favourites');	
-    <?php }
-	else if(mysql_num_rows($d)==0)
-	{
-$qr="insert into wishlist values('',$i,$ins_id)";
-$d2= mysql_query($qr);
-	?>
-alert("successfully added");
-<?php }
-else
-{?>
-alert('You are not logged in....');<?php }} ?>
-	}
+	<?php if(isset($_SESSION["name"]))
+		{
+			$i=$_SESSION['id'];
+			$qv="select * from wishlist where uid=$i and insId=$ins_id;";
+			$d= mysql_query($qv);
+			if(mysql_num_rows($d)>0)
+			{ ?>
+				alert('already added to your favourites');	
+		<?php }
+			else if(mysql_num_rows($d)==0)
+			{	
+				$qr="insert into wishlist(uid, InsId) values ($i,$ins_id)";
+				$d2= mysql_query($qr);
+				
+				?>
+				alert("successfully added");
+		<?php }
+		}
+		else
+		{?>
+			alert('You are not logged in....');
+	<?php }
+		?>
+}
 	
 
 </script>
