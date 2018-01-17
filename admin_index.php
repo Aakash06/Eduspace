@@ -1,414 +1,405 @@
- <?php
-	session_start();
-	include('config.php');
+<?php
+session_start();
+include('config.php');
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="css/search_config.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/search_config.css">
 
-<link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <link href='https://fonts.googleapis.com/css?family=Play|Orbitron:700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Play|Orbitron:700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
 
-<link rel="stylesheet" type="text/css" href="css/main.css">
-<link type="text/javascript" href="script/home.js">
-<link rel="icon" href="images/icon.png">
-<link rel="stylesheet" type="text/css" href="script/jquery-ui-1.11.4.custom/jquery-ui-1.11.4.custom/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link type="text/javascript" href="script/home.js">
+    <link rel="icon" href="images/icon.png">
+    <link rel="stylesheet" type="text/css" href="script/jquery-ui-1.11.4.custom/jquery-ui-1.11.4.custom/jquery-ui.css">
 
 
-<title>Admin</title>
-<link rel="icon" type ="image/png" href="images/thumbnail.jpg">
-<link rel="stylesheet" href="css/contact-form.css">
-<link rel="stylesheet" href="css/style.css">
-<script src="js/jquery.js"></script>
-<script src="js/tmStickUp.js"></script>
-<script src="js/jquery.ui.totop.js"></script>
-<script>
- $(window).load(function(){
-  $().UItoTop({ easingType: 'easeOutQuart' });
-  $('#stuck_container').tmStickUp({});  
- }); 
-</script>
-<style>
-.op1
-{
-  font-size:20px;
-  text-align:center;
-  color:#6d6a6a;
-  text-shadow:3px 3px 6px;	
-}
-.opr
-{
-  font-size:20px;
-  text-align:center;
-  color:red;
-  text-shadow:3px 3px 6px;	
-}
-.op2
-{
-  font-size:20px;
-  margin-left:50px;
-  color:green;
-  text-shadow:3px 3px 6px;
-}
-</style>
+    <title>Admin</title>
+    <link rel="icon" type="image/png" href="images/thumbnail.jpg">
+    <link rel="stylesheet" href="css/contact-form.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/tmStickUp.js"></script>
+    <script src="js/jquery.ui.totop.js"></script>
+    <script>
+        $(window).load(function () {
+            $().UItoTop({easingType: 'easeOutQuart'});
+            $('#stuck_container').tmStickUp({});
+        });
+    </script>
+    <style>
+        .op1 {
+            font-size: 20px;
+            text-align: center;
+            color: #6d6a6a;
+            text-shadow: 3px 3px 6px;
+        }
+
+        .opr {
+            font-size: 20px;
+            text-align: center;
+            color: red;
+            text-shadow: 3px 3px 6px;
+        }
+
+        .op2 {
+            font-size: 20px;
+            margin-left: 50px;
+            color: green;
+            text-shadow: 3px 3px 6px;
+        }
+    </style>
 
 
-<script src="script/jquery-1.11.3.min.js">
+    <script src="script/jquery-1.11.3.min.js">
 
-</script>
+    </script>
 
-<script>
-	
-	var arr = [], arrt = [];
-	
-	$(document).ready(function() {
+    <script>
 
-	$(".sort_type").mousedown(function(){
-		$(".aa").toggle(400);
-	});
-	$(".sports").mousedown(function(){
-		$(".a").toggle();
-		$(".a").trigger('toggledit',['sports']);
-	});
-	
-	
-	$(".test").bind('toggledit',function(event, p1){
-		if (arr.indexOf(p1)==-1) {
-			arr.push(p1);
-		}
-		else {
-			arr.splice(arr.indexOf(p1),1);
-		}
-		if (arr.length==0 && arrt.length==0)
-		{
-			$('.block').each(function(){
-				$(this).fadeIn('slow');
-			});
-		}
-		else
-		{
-			$('.block').each(function(){
-				var item = $(this).attr('data-tag');
-				var arrvalues = item.split(',');
-				var ftemp=0;
-				for (var i=0; i<arrvalues.length; i++)
-				{
-					if (jQuery.inArray(arrvalues[i],arr) > -1)
-					{ ftemp++; 
-					  //break;
-					}
-				}
-				if (ftemp==arr.length)
-				{ $(this).fadeIn('slow'); }
-				else
-				{ $(this).hide();
-				  //alert( $(this).css.('display') );
-				}
-			});
-		}
-	});
-	
-	$(".test").bind('toggledit2',function(event, p1){
-		if (arrt.indexOf(p1)==-1) {
-			arrt.push(p1);
-			//alert('Pushed '+p1+', '+arrt);
-		}
-		else {
-			arrt.splice(arrt.indexOf(p1),1);
-			//alert('Popped '+p1+', '+arrt);
-		}
-		if (arrt.length==0 && arr.length==0)
-		{
-			$('.block').each(function(){
-				$(this).fadeIn('slow');
-			});
-		}
-		else
-		{
-			$('.block').each(function(){
-				var item = $(this).attr('data-tag');
-				var arrvalues = item.split(',');
-				var ftemp=0;
-				//alert(arrvalues);
-				for (var i=0; i<arrvalues.length; i++)
-				{   //alert('for loop -> ith value: '+i+'; '+arrvalues[i]);
-					if (jQuery.inArray(arrvalues[i],arrt) > -1)
-					{ ftemp=1; 
-					  //alert('Found In Array');
-					  break;
-					}
-				}
-				if (ftemp==1)
-				{ $(this).fadeIn('slow'); }
-				else
-				{ $(this).hide(); }
-			});
-		}
-	});
-	$(".test").bind('removeit',function(event, p1){
-		if (arr.indexOf(p1)>=0) {
-			arr.splice(arr.indexOf(p1),1);
-		}
-		if (arr.length==0)
-		{
-			$('.block').each(function(){
-				$(this).fadeIn('slow');
-			});
-		}
-		else
-		{
-			$('.block').each(function(){
-				var item = $(this).attr('data-tag');
-				var arrvalues = item.split(',');
-				var ftemp=0;
-				for (var i=0; i<arrvalues.length; i++)
-				{
-					if (jQuery.inArray(arrvalues[i],arr) > -1)
-					{ ftemp++; 
-					  //break;
-					}
-				}
-				if (ftemp==arr.length)
-				{ $(this).fadeIn('slow'); }
-				else
-				{ $(this).hide(); }
-			});
-		}
-	});
-	
-	
-	
-	$(".sports1").mousedown(function(){
-		$(".a2").toggle();
-		$(".a2").trigger('toggledit',['sports']);
-	});
-	$(".day").mousedown(function(){
-		$(".b").toggle();
-		$(".b").trigger('toggledit',['day']);
-	});
-	$(".sp").mousedown(function(){
-		$(".c").toggle();
-		$(".c").trigger('toggledit',['pool']);
-	});
-	$(".music").mousedown(function(){
-		$(".d").toggle();
-		$(".d").trigger('toggledit',['music']);
-	});
-	$(".dance").mousedown(function(){
-		$(".e").toggle();
-		$(".e").trigger('toggledit',['dance']);
-	});
-	$(".sclass").mousedown(function(){
-		$(".f").toggle();
-		$(".f").trigger('toggledit',['smartclass']);
-	});
-	$(".ac").mousedown(function(){
-		$(".m").toggle();
-		$(".m").trigger('toggledit',['ac']);
-	});
-	$(".tf").mousedown(function(){
-		$(".n").toggle();
-		$(".n").trigger('toggledit',['transport']);
-	});
-	$(".govt").mousedown(function(){
-		$(".g").toggle();
-		$(".g").trigger('toggledit',['govt']);
-		$(".h").hide();
-		$(".h").trigger('removeit',['pvt']);
-		$(".i").hide();
-		$(".i").trigger('removeit',['charity']);
-	});
-	$(".pvt").mousedown(function(){
-		$(".h").toggle();
-		$(".h").trigger('toggledit',['pvt']);
-		$(".g").hide();
-		$(".g").trigger('removeit',['govt']);
-		$(".i").hide();
-		$(".i").trigger('removeit',['charity']);
-	});
-	$(".cs").mousedown(function(){
-		$(".i").toggle();
-		$(".i").trigger('toggledit',['charity']);
-		$(".h").hide();
-		$(".h").trigger('removeit',['pvt']);
-		$(".g").hide();
-		$(".g").trigger('removeit',['govt']);
-	});
-	$(".coed").mousedown(function(){
-		$(".j").toggle();
-		$(".j").trigger('toggledit',['coed']);
-		$(".k").hide();
-		$(".k").trigger('removeit',['boys']);
-		$(".l").hide();
-		$(".l").trigger('removeit',['girls']);
-	});
-	$(".ob").mousedown(function(){
-		$(".k").toggle();
-		$(".k").trigger('toggledit',['boys']);
-		$(".j").hide();
-		$(".j").trigger('removeit',['coed']);
-		$(".l").hide();
-		$(".l").trigger('removeit',['girls']);
-	});
-	$(".og").mousedown(function(){
-		$(".l").toggle();
-		$(".l").trigger('toggledit',['girls']);
-		$(".j").hide();
-		$(".j").trigger('removeit',['coed']);
-		$(".k").hide();
-		$(".k").trigger('removeit',['boys']);
-	});
-	$(".sp1").mousedown(function(){
-		$(".c1").toggle();
-		$(".c1").trigger('toggledit',['pool']);
-	});
-	$(".music1").mousedown(function(){
-		$(".d1").toggle();
-		$(".d1").trigger('toggledit',['music']);
-	});
-	$(".dance1").mousedown(function(){
-		$(".e1").toggle();
-		$(".e1").trigger('toggledit',['dance']);
-	});	
-	$(".host").mousedown(function(){
-		$(".f1").toggle();
-		$(".f1").trigger('toggledit',['hostel']);
-	});
-	$(".ac1").mousedown(function(){
-		$(".m1").toggle();
-		$(".m1").trigger('toggledit',['ac']);
-	});
-	$(".govt1").mousedown(function(){
-		$(".g1").toggle();
-		$(".g1").trigger('toggledit',['govt']);
-		$(".h1").hide();
-		$(".h1").trigger('removeit',['pvt']);
-	});
-	$(".pvt1").mousedown(function(){
-		$(".h1").toggle();
-		$(".h1").trigger('toggledit',['pvt']);
-		$(".g1").hide();
-		$(".g1").trigger('removeit',['govt']);		
-	});
-	$(".ugc").mousedown(function(){
-		$(".j1").toggle();
-		$(".j1").trigger('toggledit',['ugc']);
-		$(".k1").hide();
-		$(".k1").trigger('removeit',['csir']);
-		$(".l1").hide();
-		$(".l1").trigger('removeit',['state']);
-	});
-	$(".csir").mousedown(function(){
-		$(".k1").toggle();
-		$(".k1").trigger('toggledit',['csir']);
-		$(".j1").hide();
-		$(".j1").trigger('removeit',['ugc']);
-		$(".l1").hide();
-		$(".l1").trigger('removeit',['state']);
-	});
-	$(".state").mousedown(function(){
-		$(".l1").toggle();
-		$(".l1").trigger('toggledit',['state']);
-		$(".k1").hide();
-		$(".k1").trigger('removeit',['csir']);
-		$(".j1").hide();
-		$(".j1").trigger('removeit',['ugc']);
-	});
-	$(".eng").mousedown(function(){
-		$(".z1").toggle();
-		$(".z1").trigger('toggledit',['eng']);
-		$(".y1").hide();
-		$(".y1").trigger('removeit',['med']);
-		$(".x1").hide();
-		$(".x1").trigger('removeit',['art']);
-		$(".w1").hide();
-		$(".w1").trigger('removeit',['man']);
-	});
-	$(".med").mousedown(function(){
-		$(".y1").toggle();
-		$(".y1").trigger('toggledit',['med']);
-		$(".z1").hide();
-		$(".z1").trigger('removeit',['eng']);
-		$(".x1").hide();
-		$(".x1").trigger('removeit',['art']);
-		$(".w1").hide();
-		$(".w1").trigger('removeit',['man']);
-	});
-	$(".art").mousedown(function(){
-		$(".x1").toggle();
-		$(".x1").trigger('toggledit',['art']);
-		$(".y1").hide();
-		$(".y1").trigger('removeit',['med']);
-		$(".z1").hide();
-		$(".z1").trigger('removeit',['eng']);
-		$(".w1").hide();
-		$(".w1").trigger('removeit',['man']);
-	});
-	$(".mang").mousedown(function(){
-		$(".w1").toggle();
-		$(".w1").trigger('toggledit',['man']);
-		$(".y1").hide();
-		$(".y1").trigger('removeit',['med']);
-		$(".x1").hide();
-		$(".x1").trigger('removeit',['art']);
-		$(".z1").hide();
-		$(".z1").trigger('removeit',['eng']);
-	});
-		
-		
-		
-		
-	$(window).scroll(function() { 
-		var scroll = $(window).scrollTop();
-        if (scroll > 4) {
-			$("#log").attr('src','images/icon.png');
-			$(".header").addClass('smaller');
-			$(".smaller").removeClass('header');
-			$(".lul").removeClass("drop_it_down");
-			$(".lul").addClass("smaller_drop_it_down");
-		}
-		else {
-			$("#log").attr('src','images/logo2.png');
-            $(".smaller").addClass("header");
-			$(".header").removeClass("smaller");
-			$(".smaller_drop_it_down").addClass("drop_it_down");
-			$(".drop_it_down").removeClass("smaller_drop_it_down");
-		}
-    });
-	
-	$("#Login").click(function(){
-		$(".lul").toggle();
-	});
-	
-	});
+        var arr = [], arrt = [];
 
-	function log_me_out() {
-		window.location.href="log_me_out.php";
-	}
-	
-	function playvalidate() {
-		var e = document.getElementById("playselect");
-		var strUser = e.options[e.selectedIndex].value;
-		if (strUser!="name" && strUser!="localty" && strUser!="pincode")
-		{
-			alert('Choose A Filter');
-			return false;
-		}
-		return true;
-	}
-</script>
+        $(document).ready(function () {
 
-<title>EduSpace</title>
+            $(".sort_type").mousedown(function () {
+                $(".aa").toggle(400);
+            });
+            $(".sports").mousedown(function () {
+                $(".a").toggle();
+                $(".a").trigger('toggledit', ['sports']);
+            });
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
+            $(".test").bind('toggledit', function (event, p1) {
+                if (arr.indexOf(p1) == -1) {
+                    arr.push(p1);
+                }
+                else {
+                    arr.splice(arr.indexOf(p1), 1);
+                }
+                if (arr.length == 0 && arrt.length == 0) {
+                    $('.block').each(function () {
+                        $(this).fadeIn('slow');
+                    });
+                }
+                else {
+                    $('.block').each(function () {
+                        var item = $(this).attr('data-tag');
+                        var arrvalues = item.split(',');
+                        var ftemp = 0;
+                        for (var i = 0; i < arrvalues.length; i++) {
+                            if (jQuery.inArray(arrvalues[i], arr) > -1) {
+                                ftemp++;
+                                //break;
+                            }
+                        }
+                        if (ftemp == arr.length) {
+                            $(this).fadeIn('slow');
+                        }
+                        else {
+                            $(this).hide();
+                            //alert( $(this).css.('display') );
+                        }
+                    });
+                }
+            });
+
+            $(".test").bind('toggledit2', function (event, p1) {
+                if (arrt.indexOf(p1) == -1) {
+                    arrt.push(p1);
+                    //alert('Pushed '+p1+', '+arrt);
+                }
+                else {
+                    arrt.splice(arrt.indexOf(p1), 1);
+                    //alert('Popped '+p1+', '+arrt);
+                }
+                if (arrt.length == 0 && arr.length == 0) {
+                    $('.block').each(function () {
+                        $(this).fadeIn('slow');
+                    });
+                }
+                else {
+                    $('.block').each(function () {
+                        var item = $(this).attr('data-tag');
+                        var arrvalues = item.split(',');
+                        var ftemp = 0;
+                        //alert(arrvalues);
+                        for (var i = 0; i < arrvalues.length; i++) {   //alert('for loop -> ith value: '+i+'; '+arrvalues[i]);
+                            if (jQuery.inArray(arrvalues[i], arrt) > -1) {
+                                ftemp = 1;
+                                //alert('Found In Array');
+                                break;
+                            }
+                        }
+                        if (ftemp == 1) {
+                            $(this).fadeIn('slow');
+                        }
+                        else {
+                            $(this).hide();
+                        }
+                    });
+                }
+            });
+            $(".test").bind('removeit', function (event, p1) {
+                if (arr.indexOf(p1) >= 0) {
+                    arr.splice(arr.indexOf(p1), 1);
+                }
+                if (arr.length == 0) {
+                    $('.block').each(function () {
+                        $(this).fadeIn('slow');
+                    });
+                }
+                else {
+                    $('.block').each(function () {
+                        var item = $(this).attr('data-tag');
+                        var arrvalues = item.split(',');
+                        var ftemp = 0;
+                        for (var i = 0; i < arrvalues.length; i++) {
+                            if (jQuery.inArray(arrvalues[i], arr) > -1) {
+                                ftemp++;
+                                //break;
+                            }
+                        }
+                        if (ftemp == arr.length) {
+                            $(this).fadeIn('slow');
+                        }
+                        else {
+                            $(this).hide();
+                        }
+                    });
+                }
+            });
+
+
+            $(".sports1").mousedown(function () {
+                $(".a2").toggle();
+                $(".a2").trigger('toggledit', ['sports']);
+            });
+            $(".day").mousedown(function () {
+                $(".b").toggle();
+                $(".b").trigger('toggledit', ['day']);
+            });
+            $(".sp").mousedown(function () {
+                $(".c").toggle();
+                $(".c").trigger('toggledit', ['pool']);
+            });
+            $(".music").mousedown(function () {
+                $(".d").toggle();
+                $(".d").trigger('toggledit', ['music']);
+            });
+            $(".dance").mousedown(function () {
+                $(".e").toggle();
+                $(".e").trigger('toggledit', ['dance']);
+            });
+            $(".sclass").mousedown(function () {
+                $(".f").toggle();
+                $(".f").trigger('toggledit', ['smartclass']);
+            });
+            $(".ac").mousedown(function () {
+                $(".m").toggle();
+                $(".m").trigger('toggledit', ['ac']);
+            });
+            $(".tf").mousedown(function () {
+                $(".n").toggle();
+                $(".n").trigger('toggledit', ['transport']);
+            });
+            $(".govt").mousedown(function () {
+                $(".g").toggle();
+                $(".g").trigger('toggledit', ['govt']);
+                $(".h").hide();
+                $(".h").trigger('removeit', ['pvt']);
+                $(".i").hide();
+                $(".i").trigger('removeit', ['charity']);
+            });
+            $(".pvt").mousedown(function () {
+                $(".h").toggle();
+                $(".h").trigger('toggledit', ['pvt']);
+                $(".g").hide();
+                $(".g").trigger('removeit', ['govt']);
+                $(".i").hide();
+                $(".i").trigger('removeit', ['charity']);
+            });
+            $(".cs").mousedown(function () {
+                $(".i").toggle();
+                $(".i").trigger('toggledit', ['charity']);
+                $(".h").hide();
+                $(".h").trigger('removeit', ['pvt']);
+                $(".g").hide();
+                $(".g").trigger('removeit', ['govt']);
+            });
+            $(".coed").mousedown(function () {
+                $(".j").toggle();
+                $(".j").trigger('toggledit', ['coed']);
+                $(".k").hide();
+                $(".k").trigger('removeit', ['boys']);
+                $(".l").hide();
+                $(".l").trigger('removeit', ['girls']);
+            });
+            $(".ob").mousedown(function () {
+                $(".k").toggle();
+                $(".k").trigger('toggledit', ['boys']);
+                $(".j").hide();
+                $(".j").trigger('removeit', ['coed']);
+                $(".l").hide();
+                $(".l").trigger('removeit', ['girls']);
+            });
+            $(".og").mousedown(function () {
+                $(".l").toggle();
+                $(".l").trigger('toggledit', ['girls']);
+                $(".j").hide();
+                $(".j").trigger('removeit', ['coed']);
+                $(".k").hide();
+                $(".k").trigger('removeit', ['boys']);
+            });
+            $(".sp1").mousedown(function () {
+                $(".c1").toggle();
+                $(".c1").trigger('toggledit', ['pool']);
+            });
+            $(".music1").mousedown(function () {
+                $(".d1").toggle();
+                $(".d1").trigger('toggledit', ['music']);
+            });
+            $(".dance1").mousedown(function () {
+                $(".e1").toggle();
+                $(".e1").trigger('toggledit', ['dance']);
+            });
+            $(".host").mousedown(function () {
+                $(".f1").toggle();
+                $(".f1").trigger('toggledit', ['hostel']);
+            });
+            $(".ac1").mousedown(function () {
+                $(".m1").toggle();
+                $(".m1").trigger('toggledit', ['ac']);
+            });
+            $(".govt1").mousedown(function () {
+                $(".g1").toggle();
+                $(".g1").trigger('toggledit', ['govt']);
+                $(".h1").hide();
+                $(".h1").trigger('removeit', ['pvt']);
+            });
+            $(".pvt1").mousedown(function () {
+                $(".h1").toggle();
+                $(".h1").trigger('toggledit', ['pvt']);
+                $(".g1").hide();
+                $(".g1").trigger('removeit', ['govt']);
+            });
+            $(".ugc").mousedown(function () {
+                $(".j1").toggle();
+                $(".j1").trigger('toggledit', ['ugc']);
+                $(".k1").hide();
+                $(".k1").trigger('removeit', ['csir']);
+                $(".l1").hide();
+                $(".l1").trigger('removeit', ['state']);
+            });
+            $(".csir").mousedown(function () {
+                $(".k1").toggle();
+                $(".k1").trigger('toggledit', ['csir']);
+                $(".j1").hide();
+                $(".j1").trigger('removeit', ['ugc']);
+                $(".l1").hide();
+                $(".l1").trigger('removeit', ['state']);
+            });
+            $(".state").mousedown(function () {
+                $(".l1").toggle();
+                $(".l1").trigger('toggledit', ['state']);
+                $(".k1").hide();
+                $(".k1").trigger('removeit', ['csir']);
+                $(".j1").hide();
+                $(".j1").trigger('removeit', ['ugc']);
+            });
+            $(".eng").mousedown(function () {
+                $(".z1").toggle();
+                $(".z1").trigger('toggledit', ['eng']);
+                $(".y1").hide();
+                $(".y1").trigger('removeit', ['med']);
+                $(".x1").hide();
+                $(".x1").trigger('removeit', ['art']);
+                $(".w1").hide();
+                $(".w1").trigger('removeit', ['man']);
+            });
+            $(".med").mousedown(function () {
+                $(".y1").toggle();
+                $(".y1").trigger('toggledit', ['med']);
+                $(".z1").hide();
+                $(".z1").trigger('removeit', ['eng']);
+                $(".x1").hide();
+                $(".x1").trigger('removeit', ['art']);
+                $(".w1").hide();
+                $(".w1").trigger('removeit', ['man']);
+            });
+            $(".art").mousedown(function () {
+                $(".x1").toggle();
+                $(".x1").trigger('toggledit', ['art']);
+                $(".y1").hide();
+                $(".y1").trigger('removeit', ['med']);
+                $(".z1").hide();
+                $(".z1").trigger('removeit', ['eng']);
+                $(".w1").hide();
+                $(".w1").trigger('removeit', ['man']);
+            });
+            $(".mang").mousedown(function () {
+                $(".w1").toggle();
+                $(".w1").trigger('toggledit', ['man']);
+                $(".y1").hide();
+                $(".y1").trigger('removeit', ['med']);
+                $(".x1").hide();
+                $(".x1").trigger('removeit', ['art']);
+                $(".z1").hide();
+                $(".z1").trigger('removeit', ['eng']);
+            });
+
+
+            $(window).scroll(function () {
+                var scroll = $(window).scrollTop();
+                if (scroll > 4) {
+                    $("#log").attr('src', 'images/icon.png');
+                    $(".header").addClass('smaller');
+                    $(".smaller").removeClass('header');
+                    $(".lul").removeClass("drop_it_down");
+                    $(".lul").addClass("smaller_drop_it_down");
+                }
+                else {
+                    $("#log").attr('src', 'images/logo2.png');
+                    $(".smaller").addClass("header");
+                    $(".header").removeClass("smaller");
+                    $(".smaller_drop_it_down").addClass("drop_it_down");
+                    $(".drop_it_down").removeClass("smaller_drop_it_down");
+                }
+            });
+
+            $("#Login").click(function () {
+                $(".lul").toggle();
+            });
+
+        });
+
+        function log_me_out() {
+            window.location.href = "log_me_out.php";
+        }
+
+        function playvalidate() {
+            var e = document.getElementById("playselect");
+            var strUser = e.options[e.selectedIndex].value;
+            if (strUser != "name" && strUser != "localty" && strUser != "pincode") {
+                alert('Choose A Filter');
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+    <title>EduSpace</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
 
@@ -416,45 +407,48 @@
 
 
 <?php
-	if (isset($_SESSION["name"]))
-	{
-		echo "<script>window.location.href='index.php'</script>";
-	}
-	if (!isset($_SESSION["admin_name"]))
-	{
-		echo "<script>window.location.href='index.php'</script>";
-	}
+if (isset($_SESSION["name"])) {
+    echo "<script>window.location.href='index.php'</script>";
+}
+if (!isset($_SESSION["admin_name"])) {
+    echo "<script>window.location.href='index.php'</script>";
+}
 ?>
 
 
-<div class="header navbar-fixed-top" >
-<div class="header_left" id="LOGO">
-<img src="images/logo2.png" width="100%" height="100%" id="log" class="l"></div>
-<a href="index.php" style="text-decoration:none">
-<div class="header_right" >
-<div class="homeb">
-<img src="images/home_button.png" width="100%" height="100%"></div>
-</div>
+<div class="header navbar-fixed-top">
+    <div class="header_left" id="LOGO">
+        <img src="images/logo2.png" width="100%" height="100%" id="log" class="l"></div>
+    <a href="index.php" style="text-decoration:none">
+        <div class="header_right">
+            <div class="homeb">
+                <img src="images/home_button.png" width="100%" height="100%"></div>
+        </div>
 
-</a>
+    </a>
 </div>
 
 
 <?php
-$m="Institute Requests";	
+$m = "Institute Requests";
 
 
 ?>
 
-<center><div style="font-family: 'Bree Serif', serif; font-size:2.5em; margin-top:90px;">Add Institute Requests</div></center>
+<center>
+    <div style="font-family: 'Bree Serif', serif; font-size:2.5em; margin-top:90px;">Add Institute Requests</div>
+</center>
 <!--<br>
-<center><div style="font-family: 'Indie Flower', cursive; font-size:2em;"><?php echo $m?></div></center>
+<center><div style="font-family: 'Indie Flower', cursive; font-size:2em;"><?php echo $m ?></div></center>
 -->
 
 <hr style="width:90%;border:2px solid grey;">
-<div class="sort_type" >
-<center><div class="glyphicon glyphicon-chevron-down aa" style="display:none;"></div></center>
-<div class="sort_text"> </div></center></div>
+<div class="sort_type">
+    <center>
+        <div class="glyphicon glyphicon-chevron-down aa" style="display:none;"></div>
+    </center>
+    <div class="sort_text"></div>
+    </center></div>
 
 
 <!--
@@ -572,19 +566,19 @@ $(document).ready(function(e) {
 
 
 <script>
-window.onscroll =yHandler;
-function yHandler(){
-	
-var srch=document.getElementById('srch');	
-var contentHeight= srch.offsetHeight;//alert(contentHeight);
-var yOffest=window.pageYOffset;
-var y= yOffset+ window.innerHeight;
-if(y>=contentHeight)
-{//alert('helo');
-}
-var status=document.getElementById('plk');
+    window.onscroll = yHandler;
+
+    function yHandler() {
+
+        var srch = document.getElementById('srch');
+        var contentHeight = srch.offsetHeight;//alert(contentHeight);
+        var yOffest = window.pageYOffset;
+        var y = yOffset + window.innerHeight;
+        if (y >= contentHeight) {//alert('helo');
+        }
+        var status = document.getElementById('plk');
 //alert( contentHeight+' & '+y);	
-}
+    }
 
 
 </script>
@@ -592,130 +586,176 @@ var status=document.getElementById('plk');
 <div class="search_results" id="srch">
 
 
-<?php
-	
-	$count=0;
-	  $query = "select id, name, address, website, contact, image, fees from temp_institutes";
-	  $data = mysql_query($query);
-	  $num = mysql_num_rows($data);
-	  if ($num>0)
-	  { while ($qrow = mysql_fetch_array($data))
-	    { $count++;
-?>
+    <?php
+
+    $count = 0;
+    $query = "select id, name, address, website, contact, image, fees from temp_institutes";
+    $data = mysql_query($query);
+    $num = mysql_num_rows($data);
+    if ($num > 0) {
+        while ($qrow = mysql_fetch_array($data)) {
+            $count++;
+            ?>
 
 
-<?php
-	// abhi konsa school chl rha h, uski image
-	$cur_img=$qrow['image'];
-	$q2="select pool, day, sports, music, dance, smartclass, ac,transport , govt, pvt, charity, coed, girls, boys, ugc, state, csir, eng, med, art, man from temp_institutes, temp_filters where temp_institutes.image = '$cur_img' and temp_institutes.id=temp_filters.idinst";
-	$d2=mysql_query($q2);$qr2 = mysql_fetch_array($d2);
-	
-	$filter_lists="faltu";
-	
-	if ( $qr2["pool"]=="y" )  { $filter_lists.=",pool"; }
-	if ( $qr2["day"]=="y" )	{ $filter_lists.=",day"; }
-	if ( $qr2["sports"]=="y" )	{ $filter_lists.=",sports"; }
-	if ( $qr2["music"]=="y" )	{ $filter_lists.=",music"; }
-	if ( $qr2["dance"]=="y" )	{ $filter_lists.=",dance"; }
-	if ( $qr2["smartclass"]=="y" )	{ $filter_lists.=",smartclass"; }
-	if ( $qr2["ac"]=="y" )	{ $filter_lists.=",ac"; }
-	if ( $qr2["transport"]=="y" )	{ $filter_lists.=",transport"; }
-	if ( $qr2["govt"]=="y" )	{ $filter_lists.=",govt"; }
-	if ( $qr2["pvt"]=="y" )	{ $filter_lists.=",pvt"; }
-	if ( $qr2["charity"]=="y" )	{ $filter_lists.=",charity"; }
-	if ( $qr2["coed"]=="y" )	{ $filter_lists.=",coed"; }
-	if ( $qr2["girls"]=="y" )	{ $filter_lists.=",girls"; }
-	if ( $qr2["boys"]=="y" )	{ $filter_lists.=",boys"; }
-	if ( $qr2["ugc"]=="y" )	{ $filter_lists.=",ugc"; }
-	if ( $qr2["csir"]=="y" )	{ $filter_lists.=",csir"; }
-	if ( $qr2["state"]=="y" )	{ $filter_lists.=",state"; }
-	if ( $qr2["eng"]=="y" )	{ $filter_lists.=",eng"; }
-	if ( $qr2["med"]=="y" )	{ $filter_lists.=",med"; }
-	if ( $qr2["art"]=="y" )	{ $filter_lists.=",art"; }
-	if ( $qr2["man"]=="y" )	{ $filter_lists.=",man"; }
-	//echo $filter_lists ;
-	
-	/*$queryt = "select fees from institutes where image='$curr_img'";
-	$datat = mysql_query($queryt);
-	$runt = mysql_fetch_array($datat);
-	$fees = $runt["fees"];*/
-?>
+            <?php
+            // abhi konsa school chl rha h, uski image
+            $cur_img = $qrow['image'];
+            $q2 = "select pool, day, sports, music, dance, smartclass, ac,transport , govt, pvt, charity, coed, girls, boys, ugc, state, csir, eng, med, art, man from temp_institutes, temp_filters where temp_institutes.image = '$cur_img' and temp_institutes.id=temp_filters.idinst";
+            $d2 = mysql_query($q2);
+            $qr2 = mysql_fetch_array($d2);
 
-<div class="recent_searches container-fluid block" style="margin-bottom:30px;padding-bottom:10px;padding-top:10px;" data-price="<?php echo $qrow["fees"]; ?>" data-tag="<?php echo $filter_lists ?>">
-<div class="recent_searches_heading" ><?php echo $qrow["name"]; ?></div>
-<img src="<?php echo $qrow['image']?>" class="recent_searches_img img-responsive" style="float:left;">
+            $filter_lists = "faltu";
 
-<div class="recent_searches_des" >
-<hr style="border-top:1px solid cyan;">
-<b>Features:</b>
-<li><b> Fees: Rs <?php echo $qrow["fees"];?> 
+            if ($qr2["pool"] == "y") {
+                $filter_lists .= ",pool";
+            }
+            if ($qr2["day"] == "y") {
+                $filter_lists .= ",day";
+            }
+            if ($qr2["sports"] == "y") {
+                $filter_lists .= ",sports";
+            }
+            if ($qr2["music"] == "y") {
+                $filter_lists .= ",music";
+            }
+            if ($qr2["dance"] == "y") {
+                $filter_lists .= ",dance";
+            }
+            if ($qr2["smartclass"] == "y") {
+                $filter_lists .= ",smartclass";
+            }
+            if ($qr2["ac"] == "y") {
+                $filter_lists .= ",ac";
+            }
+            if ($qr2["transport"] == "y") {
+                $filter_lists .= ",transport";
+            }
+            if ($qr2["govt"] == "y") {
+                $filter_lists .= ",govt";
+            }
+            if ($qr2["pvt"] == "y") {
+                $filter_lists .= ",pvt";
+            }
+            if ($qr2["charity"] == "y") {
+                $filter_lists .= ",charity";
+            }
+            if ($qr2["coed"] == "y") {
+                $filter_lists .= ",coed";
+            }
+            if ($qr2["girls"] == "y") {
+                $filter_lists .= ",girls";
+            }
+            if ($qr2["boys"] == "y") {
+                $filter_lists .= ",boys";
+            }
+            if ($qr2["ugc"] == "y") {
+                $filter_lists .= ",ugc";
+            }
+            if ($qr2["csir"] == "y") {
+                $filter_lists .= ",csir";
+            }
+            if ($qr2["state"] == "y") {
+                $filter_lists .= ",state";
+            }
+            if ($qr2["eng"] == "y") {
+                $filter_lists .= ",eng";
+            }
+            if ($qr2["med"] == "y") {
+                $filter_lists .= ",med";
+            }
+            if ($qr2["art"] == "y") {
+                $filter_lists .= ",art";
+            }
+            if ($qr2["man"] == "y") {
+                $filter_lists .= ",man";
+            }
+            //echo $filter_lists ;
 
-per Year</b>
-<li> Affiliated to <? if ($qr2["ugc"]=="y") echo "UGC"; else if ($qr2["csir"]=="y") echo "CSIR"; else echo "State"; ?>
-<?php
-	
-	$q1 = "select facilities.Facilities from institutes, facilities where institutes.id=facilities.idinst AND institutes.image LIKE '%$cur_img%'";
-	$d1 = mysql_query($q1);
-	$n1 = mysql_num_rows($d1);
-	if ($n1>0)
-	{
-?>
-<!--<li> Total <?php echo $n1; ?> Facilities.-->
-<?php
-		$rnum1 = mt_rand(1,$n1);
-		$rnum2 = mt_rand(1,$n1);
-		while ($rnum1==$rnum2)
-		{		
-			$rnum2 = mt_rand(1,$n1);
-		}	
-		$temp=1;
-		while ($qr1 = mysql_fetch_array($d1))
-		{ 
-			if ($temp==$rnum1 || $temp==$rnum2)
-			{
-				echo "<li>".$qr1["Facilities"];
-			}
-			$temp++;
-		}
-	}
-//<li> Large classrooms with an area of 12 sq.ft. per child. 
-//<li> Outdoor game facilities for cricket, tennis, basketball and football.
+            /*$queryt = "select fees from institutes where image='$curr_img'";
+            $datat = mysql_query($queryt);
+            $runt = mysql_fetch_array($datat);
+            $fees = $runt["fees"];*/
+            ?>
 
-	else
-	{
-?>
-<li> No Facilities Available.
-<?php
-	}
-?>
-</li><hr style="border-top:1px solid black;">
+            <div class="recent_searches container-fluid block"
+                 style="margin-bottom:30px;padding-bottom:10px;padding-top:10px;"
+                 data-price="<?php echo $qrow["fees"]; ?>" data-tag="<?php echo $filter_lists ?>">
+                <div class="recent_searches_heading"><?php echo $qrow["name"]; ?></div>
+                <img src="<?php echo $qrow['image'] ?>" class="recent_searches_img img-responsive" style="float:left;">
 
-</div>
+                <div class="recent_searches_des">
+                    <hr style="border-top:1px solid cyan;">
+                    <b>Features:</b>
+                    <li><b> Fees: Rs <?php echo $qrow["fees"]; ?>
 
-<hr style="clear:both;border-top:1px dotted white;margin-top:-20px;">
-<div style="clear:both;margin-left:40px;margin-bottom:10px;overflow:hidden">
-	<!--<a href="addtempentry.php?x=<?php echo $qrow['id']; ?>" style="text-decoration:none;"><div style="float:left;padding:5px 10px;background-color:green;color:white;font-weight:bold;">Add</div></a>-->
-	<a href="deletetempentry.php?x=<?php echo $qrow['id']; ?>" style="text-decoration:none;"><div style="margin-left:35px;float:left;padding:5px 10px;background-color:red;color:white;font-weight:bold;">Delete</div></a>
-</div>
+                            per Year</b>
+                    <li> Affiliated
+                        to <? if ($qr2["ugc"] == "y") echo "UGC"; else if ($qr2["csir"] == "y") echo "CSIR"; else echo "State"; ?>
+                        <?php
 
-</div>
+                        $q1 = "select facilities.Facilities from institutes, facilities where institutes.id=facilities.idinst AND institutes.image LIKE '%$cur_img%'";
+                        $d1 = mysql_query($q1);
+                        $n1 = mysql_num_rows($d1);
+                        if ($n1 > 0)
+                        {
+                            ?>
+                            <!--<li> Total <?php echo $n1; ?> Facilities.-->
+                            <?php
+                            $rnum1 = mt_rand(1, $n1);
+                            $rnum2 = mt_rand(1, $n1);
+                            while ($rnum1 == $rnum2) {
+                                $rnum2 = mt_rand(1, $n1);
+                            }
+                            $temp = 1;
+                            while ($qr1 = mysql_fetch_array($d1)) {
+                                if ($temp == $rnum1 || $temp == $rnum2) {
+                                    echo "<li>" . $qr1["Facilities"];
+                                }
+                                $temp++;
+                            }
+                        }
+                        //<li> Large classrooms with an area of 12 sq.ft. per child.
+                        //<li> Outdoor game facilities for cricket, tennis, basketball and football.
 
-<?php
-		  }
-		  
-		}
-		else
-		{
-?>
-<tr>
-<td>-</td>
-<td>No Record Found</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<?php
-	  }
-	
+                        else
+                        {
+                        ?>
+                    <li> No Facilities Available.
+                        <?php
+                        }
+                        ?>
+                    </li>
+                    <hr style="border-top:1px solid black;">
+
+                </div>
+
+                <hr style="clear:both;border-top:1px dotted white;margin-top:-20px;">
+                <div style="clear:both;margin-left:40px;margin-bottom:10px;overflow:hidden">
+                    <!--<a href="addtempentry.php?x=<?php echo $qrow['id']; ?>" style="text-decoration:none;"><div style="float:left;padding:5px 10px;background-color:green;color:white;font-weight:bold;">Add</div></a>-->
+                    <a href="deletetempentry.php?x=<?php echo $qrow['id']; ?>" style="text-decoration:none;">
+                        <div style="margin-left:35px;float:left;padding:5px 10px;background-color:red;color:white;font-weight:bold;">
+                            Delete
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+
+            <?php
+        }
+
+    } else {
+        ?>
+        <tr>
+            <td>-</td>
+            <td>No Record Found</td>
+            <td>-</td>
+            <td>-</td>
+        </tr>
+        <?php
+    }
+
     ?>
 </div><!--
 <div style="float: left; width:15%; padding-left:8px; margin-top:45px;; overflow:hidden;">
@@ -735,9 +775,9 @@ per Year</b>
 
 
 <?php
-	include('foot.php');
+include('foot.php');
 ?>
 
 
-
-</body></html>
+</body>
+</html>
