@@ -79,8 +79,15 @@
             </div>
         </ul>
     </div>
-    <div style="float:right;">
+    <div class="col-md-12 text-center">
         <hr>
-        <center>© Copyright 2015. All Rights Reserved.</center>
+        © Copyright <span id="current-year"></span> All Rights Reserved.
     </div>
+    <script>
+        $(function () {
+
+            $("#current-year").html(new Date().getFullYear());
+
+        });
+    </script>
 </div>
